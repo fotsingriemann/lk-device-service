@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lk-device-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lk-device-service
+  template:
+    metadata:
+      labels:
+        app: lk-device-service
+    spec:
+      containers:
+        - name: lk-device-service
+          image: densecr2cy6b7nrjs7nu.azurecr.io/lk-device-service:1.0.1
+          ports:
+            - containerPort: 6011
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVER_URL
+              value: "my-cluster-kafka-bootstrap.kafka:9092"
+            - name: OUTPUT_TOPIC_TRACK
+              value: "track"
+            - name: OUTPUT_TOPIC_SENSOR
+              value: "sensor"
+            - name: SERVER_PORT
+              value: "6011"
+          imagePullPolicy: Always

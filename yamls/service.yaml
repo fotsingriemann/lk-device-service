@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lk-device-service
+spec:
+  selector:
+    app: lk-device-service
+  ports:
+    - port: 6011
+      targetPort: 6011
+      protocol: TCP
+#  type: NodePort
